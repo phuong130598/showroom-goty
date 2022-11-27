@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+}
+.title {
+    font-size: 25px;
+}
+.nav {
+    display:flex;
+}
+.navList {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    padding-right: 2rem;
+}
+.navLink {
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
