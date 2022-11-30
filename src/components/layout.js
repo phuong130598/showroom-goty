@@ -5,24 +5,32 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import {body,footer} from "./layout.module.css"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
+const Layout = ({ children,title }) => {
+  const { site } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+            description
+            author
+          }
         }
       }
-    }
-  `)
-    
+    `
+  )
+  const defaultTitle = site.siteMetadata?.title
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title} />
+    <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
+      <Header siteTitle={defaultTitle} />
       <div className={body}>
-        <main>{children}</main>
+        <main>
+          {title == "Home" && <p>{site.siteMetadata.description}</p>}
+          {children}
+        </main>
         <footer className={footer}>
-          © {new Date().getFullYear()} &middot; Built by Phuong Nguyen Ky
+          © {new Date().getFullYear()} &middot; Built by {site.siteMetadata.author}
         </footer>
       </div>
     </>

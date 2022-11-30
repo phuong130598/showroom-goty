@@ -1,23 +1,23 @@
 import * as React from 'react'
 import { Link,graphql } from 'gatsby'
 import Layout from '../../components/layout'
-import Seo from "../../components/seo"
-import {title} from "./games.module.css"
+import {title,imageCSS,navLink} from "./games.module.css"
+import { GatsbyImage, getImage } from 'gatsby-plugin-image' 
 
 const GamesPage = ({data: {allWpGame: {edges}}}) =>
 {
     return (
-        <Layout>
-            <Seo title="Games" />
+        <Layout title="Games">
             <h2>All the GOTY winners</h2>
             {edges.map((item) => {
                 const game = item.node.gameFields;
                 const slug = item.node.slug;
+                const image = getImage(game.picture.localFile);
                 return (
                 <div>
-                    <Link to={`/games/${slug}`}>
+                    <Link className={navLink} to={`/games/${slug}`}>
                         <p className={title} key={item.node.id}>{game.title} ({game.year})</p>
-                        <p  key={item.node.id}>fotoke</p>
+                        <GatsbyImage className={imageCSS} image={image} alt={game.picture.altText}/>
                     </Link>
                 </div>)
             })}
@@ -42,6 +42,14 @@ query {
             releaseDate
             title
             year
+            picture {
+              altText
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(placeholder: BLURRED)
+                }
+              }
+            }
           }
           genres {
             nodes {

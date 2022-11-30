@@ -2,3 +2,12 @@
 {
     font-weight: bold;
 }
+.imageCSS
+{
+    width: 300px;
+    height:auto;
+}
+.navLink
+{
+    text-decoration: none;
+}
