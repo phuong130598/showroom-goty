@@ -12,7 +12,6 @@ const Layout = ({ children,title }) => {
         site {
           siteMetadata {
             title
-            description
             author
           }
         }
@@ -26,7 +25,6 @@ const Layout = ({ children,title }) => {
       <Header siteTitle={defaultTitle} />
       <div className={body}>
         <main>
-          {title == "Home" && <p>{site.siteMetadata.description}</p>}
           {children}
         </main>
         <footer className={footer}>

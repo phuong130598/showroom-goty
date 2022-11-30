@@ -2,12 +2,14 @@
 {
     font-weight: bold;
 }
-.imageCSS
-{
-    width: 300px;
-    height:auto;
-}
 .navLink
 {
     text-decoration: none;
+    color:black;
+}
+.navLinkBack
+{
+    text-decoration: none;
+    color:blue;
+    text-transform: uppercase;
 }

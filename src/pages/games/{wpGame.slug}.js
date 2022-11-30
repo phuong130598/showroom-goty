@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../../components/layout'
-import {imageCSS, navLink} from "./games.module.css"
+import { navLinkBack} from "./games.module.css"
 import { Link } from "gatsby"
 import { GatsbyImage, getImage } from 'gatsby-plugin-image' 
 
@@ -15,7 +15,7 @@ const GamePage = ({data: {wpGame: {gameFields: game,genres:genresList}}}) =>
             <Layout title={game.title}>
                 <div>
                     <h1>{game.title} ({game.year})</h1>
-                    <GatsbyImage className={imageCSS} image={image} alt={game.picture.altText}/>
+                    <GatsbyImage image={image} alt={game.picture.altText}/>
                     <div dangerouslySetInnerHTML={{__html: game.description}} />
                     <table>
                         <tr>
@@ -51,7 +51,7 @@ const GamePage = ({data: {wpGame: {gameFields: game,genres:genresList}}}) =>
                             <td>{game.mode}</td>
                         </tr>
                     </table>
-                    <Link to="/games" className={navLink}>
+                    <Link to="/games" className={navLinkBack}>
                         Go back
                     </Link>
                 </div>
@@ -63,6 +63,7 @@ export const gameQuery = graphql`
   query ($id: String) {
     wpGame(id: {eq: $id}) {
         gameFields {
+            year
             composer
             description
             developer
@@ -73,12 +74,11 @@ export const gameQuery = graphql`
             rating
             title
             releaseDate
-            year
             picture {
                 altText
                 localFile {
                     childImageSharp {
-                        gatsbyImageData(placeholder: BLURRED)
+                        gatsbyImageData(placeholder: BLURRED, width: 300)
                     }
                 }
             }

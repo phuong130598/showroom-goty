@@ -11,6 +11,15 @@ const IndexPage = () => (
     </div>
   </Layout>
 )
+export const homeQuery = graphql`
+query {
+  site {
+    siteMetadata {
+      title
+      description
+    }
+  }
+}
+`
 
-
-export default IndexPage
+export default IndexPage;

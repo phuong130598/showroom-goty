@@ -1,30 +1,47 @@
 import * as React from 'react'
 import { Link,graphql } from 'gatsby'
 import Layout from '../../components/layout'
-import {title,imageCSS,navLink} from "./games.module.css"
+import {title,navLink} from "./games.module.css"
 import { GatsbyImage, getImage } from 'gatsby-plugin-image' 
 
 const GamesPage = ({data: {allWpGame: {edges}}}) =>
 {
     return (
         <Layout title="Games">
-            <h2>All the GOTY winners</h2>
-            {edges.map((item) => {
+            <h2>The GOTY award winners</h2>
+
+            {edges.sort((a,b) => a.node.gameFields.year - b.node.gameFields.year ).map((item) => {
                 const game = item.node.gameFields;
                 const slug = item.node.slug;
+                const genres = item.node.genres.nodes;
                 const image = getImage(game.picture.localFile);
                 return (
                 <div>
                     <Link className={navLink} to={`/games/${slug}`}>
                         <p className={title} key={item.node.id}>{game.title} ({game.year})</p>
-                        <GatsbyImage className={imageCSS} image={image} alt={game.picture.altText}/>
+                        <GatsbyImage  image={image} alt={game.picture.altText}/>
+                        <p>{game.rating}</p>
+                        <p>
+                          {genres.map((genre,i,row) =>
+                            {
+                              if(i+1 === row.length)
+                              {
+                                return (genre.name)
+                              }
+                              else
+                              {
+                                return (`${genre.name}, `)
+                              }
+                            }
+                          )}
+                        </p>
                     </Link>
                 </div>)
             })}
         </Layout>
     )
 }
-export const queryGames = graphql`
+export const gamesQuery = graphql`
 query {
     allWpGame {
       edges {
@@ -46,7 +63,7 @@ query {
               altText
               localFile {
                 childImageSharp {
-                  gatsbyImageData(placeholder: BLURRED)
+                  gatsbyImageData(placeholder: BLURRED, width: 300)
                 }
               }
             }
