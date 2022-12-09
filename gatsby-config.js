@@ -9,6 +9,12 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
+      resolve: 'gatsby-background-image-es5',
+      options: {
+        specialChars: '/:',
+      },
+    },
+    {
       resolve: "gatsby-source-wordpress",
       options: {
         url: "http://showroom-goty.local/graphql",
