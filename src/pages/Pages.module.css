@@ -16,7 +16,7 @@
 }
 .homeFeatured
 {
-    background-color: white;
+    background-color: rgb(230, 230, 230);
     padding: 15px;
     margin:0 50px;
     box-shadow: 2px 2px 5px 2px #888888;
@@ -32,6 +32,7 @@
 .description
 {
     font-size: 20px;
+
 }
 .games
 {
@@ -39,6 +40,16 @@
 }
 .gameImg
 {
-    margin:1;
-    flex:1;
+    filter: grayscale(100%);
+    flex:1 1;
+    margin:25px;
+    text-align: center;
+}
+.gameImg:hover
+{
+    filter: grayscale(0);
+}
+.img:hover
+{
+    box-shadow: 2px 2px 5px 2px #888888;
 }

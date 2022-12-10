@@ -4,7 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { convertToBgImage } from "gbimage-bridge"
 import BackgroundImage from 'gatsby-background-image'
 import Layout from "../components/layout"
-import {homeContent,homeFeatured,homeTitleDescription,title,description,games,gameImg} from "./Pages.module.css"
+import {homeContent,homeFeatured,homeTitleDescription,title,description,games,gameImg,img} from "./Pages.module.css"
 
 const IndexPage = ({data:{wpPage:{homeFields}}}) => {
   const image = getImage(homeFields.picture.localFile);
@@ -22,12 +22,15 @@ const IndexPage = ({data:{wpPage:{homeFields}}}) => {
           </div>
         </BackgroundImage>
         <div className={homeFeatured}>
-          <h1>Last 3 winners:</h1>
+          <h1 style={{margin:"25px"}}>Last 3 winners:</h1>
           <div className={games}>
             {featuredGames.map((game) =>
-              <Link to={`/games/${game.slug}`}>
-                <GatsbyImage className={gameImg} image={getImage(game.gameFields.picture.localFile)} alt={game.gameFields.picture.altText} />
+            <div className={gameImg}>
+              <Link  to={`/games/${game.slug}`}>
+                <GatsbyImage className={img} image={getImage(game.gameFields.picture.localFile)} alt={game.gameFields.picture.altText} />
+                {/*link pic: https://www.deepsilver.com/wp-content/uploads/sites/3/2019/11/TGA2019_Superhero_Masters.jpg */}
               </Link>
+            </div>
             )}
           </div>
         </div>

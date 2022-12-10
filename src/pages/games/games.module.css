@@ -1,6 +1,7 @@
 .title
 {
     font-weight: bold;
+    margin-bottom: 5px;
 }
 .navLink
 {
@@ -12,4 +13,31 @@
     text-decoration: none;
     color:blue;
     text-transform: uppercase;
+}
+.gamesBody
+{
+    padding: 10px;
+    margin:0 50px;
+    background-color: rgb(230,230,230);
+    box-shadow: 2px 2px 5px 2px #888888;
+}
+.gamesContent
+{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px; 
+}
+.gamesCard
+{
+    flex-basis: 31.5%;
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+    border: solid;
+    border-radius: 25px;
+    background-color: rgb(226,226,221);
+}
+.gamesCard:hover
+{
+    box-shadow: 2px 2px 5px 2px #888888;
 }
