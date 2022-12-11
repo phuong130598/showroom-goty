@@ -17,7 +17,7 @@
 .homeFeatured
 {
     background-color: rgb(230, 230, 230);
-    padding: 15px;
+    padding: 10px;
     margin:0 50px;
     box-shadow: 2px 2px 5px 2px #888888;
 }
@@ -52,4 +52,30 @@
 .img:hover
 {
     box-shadow: 2px 2px 5px 2px #888888;
+}
+/* css contact page */
+.contactBody
+{
+    padding: 10px;
+    margin:0 50px;
+    background-color: rgb(230,230,230);
+    box-shadow: 2px 2px 5px 2px #888888;
+}
+.formBody
+{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+label,input,textarea
+{
+    margin:2px 0
+}
+input,textarea
+{
+    padding:3px;
+}
+textarea
+{
+    resize:vertical;
 }
