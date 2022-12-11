@@ -4,7 +4,7 @@ import Layout from '../../components/layout'
 import {title,navLink,gamesBody,gamesContent,gamesCard} from "./games.module.css"
 import { GatsbyImage, getImage } from 'gatsby-plugin-image' 
 
-const GamesPage = ({data: {allWpGame: {edges}}}) =>
+const GamesPage = ({data: {allWpGame: {edges},wpMediaItem}}) =>
 {
   const [search,setSearch] = useState("")
   
@@ -20,13 +20,14 @@ const GamesPage = ({data: {allWpGame: {edges}}}) =>
                   const slug = item.node.slug;
                   const genres = item.node.genres.nodes;
                   const image = getImage(game.picture.localFile);
+                  const star = getImage(wpMediaItem.localFile);
                   return (
                   <div className={gamesCard}>
                       <Link className={navLink} to={`/games/${slug}`}>
                           <p className={title} key={item.node.id}>{game.title} ({game.year})</p>
                           <GatsbyImage  image={image} alt={game.picture.altText}/>
                           <div style={{display:"flex",flexDirection:"row", justifyContent:"center",alignItems:'center'}}>
-                            <img style={{height:"25px",}} src="/star.png"/>
+                            <GatsbyImage image={star} alt={star.altText}/>
                             {/* star icon:https://www.vectorstock.com/royalty-free-vector/star-icon-isolated-on-background-modern-simple-sp-vector-21073177 */}
                             <p style={{}}>{game.rating}</p>
                           </div>
@@ -54,6 +55,14 @@ const GamesPage = ({data: {allWpGame: {edges}}}) =>
 }
 export const gamesQuery = graphql`
 query {
+    wpMediaItem(title: {eq: "star"}) {
+      altText
+      localFile {
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED,height:25)
+        }
+      }
+    }
     allWpGame {
       edges {
         node {

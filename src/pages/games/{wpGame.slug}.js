@@ -6,10 +6,11 @@ import { Link } from "gatsby"
 import { GatsbyImage, getImage } from 'gatsby-plugin-image' 
 
 
-const GamePage = ({data: {wpGame: {gameFields: game,genres:genresList}}}) =>
+const GamePage = ({data: {wpGame: {gameFields: game,genres:genresList},wpMediaItem}}) =>
 {
     const genres = genresList.nodes;
     const image = getImage(game.picture.localFile);
+    const star = getImage(wpMediaItem.localFile);
     return (
         <div>
             <Layout title={game.title}>
@@ -19,7 +20,7 @@ const GamePage = ({data: {wpGame: {gameFields: game,genres:genresList}}}) =>
                         <GatsbyImage image={image} alt={game.picture.altText}/>
                         <div className={gameChild}>
                             <div className={gameRating}>
-                                <img src="/star.png" style={{height:"100px"}} alt=""/>
+                                <GatsbyImage image={star} alt={star.altText}/>
                                 <div className={gameRatingText}>{game.rating}</div>
                             </div>
                             <div dangerouslySetInnerHTML={{__html: game.description}} />
@@ -65,6 +66,14 @@ const GamePage = ({data: {wpGame: {gameFields: game,genres:genresList}}}) =>
 }
 export const gameQuery = graphql`
   query ($id: String) {
+    wpMediaItem(title: {eq: "star"}) {
+        altText
+        localFile {
+          childImageSharp {
+            gatsbyImageData(placeholder: BLURRED,height:100)
+          }
+        }
+      }
     wpGame(id: {eq: $id}) {
         gameFields {
             year
