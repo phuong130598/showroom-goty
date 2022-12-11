@@ -17,6 +17,11 @@ const Header = ({ siteTitle }) => (
               Games
             </Link>
           </li>
+          <li className={navList}>
+            <Link to="/contact" className={navLink}>
+              Contact
+            </Link>
+          </li>
         </ul>
       </nav>
   </header>

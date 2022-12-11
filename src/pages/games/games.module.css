@@ -11,8 +11,13 @@
 .navLinkBack
 {
     text-decoration: none;
-    color:blue;
+    color:teal;
     text-transform: uppercase;
+    font-weight: bold;
+}
+.navLinkBack:hover
+{
+    text-decoration:underline;
 }
 .gamesBody
 {
@@ -40,4 +45,41 @@
 .gamesCard:hover
 {
     box-shadow: 2px 2px 5px 2px #888888;
+}
+
+/* game page css */
+.gameRating
+{
+    position: relative;
+    width:100px;
+}
+.gameRatingText
+{
+    position: absolute;
+    left:35.5px;
+    top:40px;
+    font-weight: bold;
+}
+.gameContent
+{
+    display:flex;
+    align-items: center;
+}
+.gameChild
+{
+    padding: 20px;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+table
+{
+    width: 100%;
+    table-layout: fixed;
+    margin: 10px 0;
+}
+td:first-child
+{
+    width: 200px;
 }

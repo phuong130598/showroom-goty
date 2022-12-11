@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../../components/layout'
-import { navLinkBack} from "./games.module.css"
+import { navLinkBack,gamesBody,gameRating,gameRatingText,gameContent,gameChild} from "./games.module.css"
 import { Link } from "gatsby"
 import { GatsbyImage, getImage } from 'gatsby-plugin-image' 
 
@@ -13,10 +13,18 @@ const GamePage = ({data: {wpGame: {gameFields: game,genres:genresList}}}) =>
     return (
         <div>
             <Layout title={game.title}>
-                <div>
-                    <h1>{game.title} ({game.year})</h1>
-                    <GatsbyImage image={image} alt={game.picture.altText}/>
-                    <div dangerouslySetInnerHTML={{__html: game.description}} />
+                <div  className={gamesBody}>
+                    <h1 style={{marginBottom:"10px"}}>{game.title} ({game.year})</h1>
+                    <div className={gameContent}>
+                        <GatsbyImage image={image} alt={game.picture.altText}/>
+                        <div className={gameChild}>
+                            <div className={gameRating}>
+                                <img src="/star.png" style={{height:"100px"}} alt=""/>
+                                <div className={gameRatingText}>{game.rating}</div>
+                            </div>
+                            <div dangerouslySetInnerHTML={{__html: game.description}} />
+                        </div>
+                    </div>
                     <table>
                         <tr>
                             <td>Developer:</td>
@@ -35,10 +43,6 @@ const GamePage = ({data: {wpGame: {gameFields: game,genres:genresList}}}) =>
                             <td>{game.engine}</td>
                         </tr>
                         <tr>
-                            <td>Rating:</td>
-                            <td>{game.rating}</td>
-                        </tr>
-                        <tr>
                             <td>Release Date:</td>
                             <td>{game.releaseDate}</td>
                         </tr>
@@ -52,7 +56,7 @@ const GamePage = ({data: {wpGame: {gameFields: game,genres:genresList}}}) =>
                         </tr>
                     </table>
                     <Link to="/games" className={navLinkBack}>
-                        Go back
+                        Back
                     </Link>
                 </div>
             </Layout>
@@ -78,7 +82,7 @@ export const gameQuery = graphql`
                 altText
                 localFile {
                     childImageSharp {
-                        gatsbyImageData(placeholder: BLURRED, width: 300)
+                        gatsbyImageData(placeholder: BLURRED, width: 300,height:375)
                     }
                 }
             }
